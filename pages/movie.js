@@ -117,7 +117,7 @@ export default function Movie({data, author}) {
                                            src={movie.url}
                                            alt=""/>
                                     ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                    <svg
                                          className="w-full h-full rounded-full" width="44" height="44"
                                          viewBox="0 0 24 24" stroke="#cbd5e0" fill="none">
                                       <path stroke="none" d="M0 0h24v24H0z"/>
