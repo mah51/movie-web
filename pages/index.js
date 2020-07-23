@@ -8,7 +8,7 @@ export default function Home({author, data}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://127.0.0.1:8000/`)
+  const res = await fetch(`https://movie-apixd.herokuapp.com/`)
   const data = await res.json();
   return { props: {data}}
 }
