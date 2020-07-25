@@ -16,7 +16,7 @@ export default function Movie({data, author}) {
     const dataObj = {
       id,
     }
-    const response = await fetch('http://127.0.0.1:8000/remove-movie', {
+    const response = await fetch('https://movie-apixd.herokuapp.com/remove-movie', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -189,7 +189,7 @@ export default function Movie({data, author}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://127.0.0.1:8000/`)
+  const res = await fetch(`https://movie-apixd.herokuapp.com/`)
   const data = await res.json();
   return { props: {data}}
 }

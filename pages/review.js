@@ -18,7 +18,7 @@ export default function Review({data, author}) {
     e.preventDefault()
     console.log(e.target[1].value)
     console.log(e.target[0].options.selectedIndex)
-    const response = await fetch('http://127.0.0.1:8000/rating', {
+    const response = await fetch('https://movie-apixd.herokuapp.com/rating', {
       method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
@@ -94,7 +94,7 @@ export default function Review({data, author}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://127.0.0.1:8000/`)
+  const res = await fetch(`https://movie-apixd.herokuapp.com/`)
   const data = await res.json();
   return { props: {data}}
 }

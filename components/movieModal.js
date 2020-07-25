@@ -11,10 +11,10 @@ export default function MovieModal({showModal, setShowModal, movieData, author})
     const dataObj = {
       author: author,
       id: e.target.form[1].value,
-      name: e.target.form[0].value
+      name: e.target.form[0].value,
+      url: e.target.form[2].value
     }
-    e.target.form[2].value ? dataObj.url = e.target.form[2].value : null
-    const response = await fetch('http://localhost:8000/movie', {
+    const response = await fetch('https://movie-apixd.herokuapp.com/movie', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
