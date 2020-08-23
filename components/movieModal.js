@@ -1,7 +1,5 @@
 import {useState} from 'react';
-
 import React from 'react';
-import Link from "next/link";
 
 export default function MovieModal({showModal, setShowModal, movieData, author}) {
   const [valid, setValid] = useState(true)
@@ -35,7 +33,7 @@ export default function MovieModal({showModal, setShowModal, movieData, author})
 
   function handleChangeName(e) {
     setMovieID(e.target.value.split(/ +/).join('-').toLowerCase())
-    if(e.target.value.length > 3 && e.target.value.length < 20 && !movieData.filter(movie => movie.name === e.target.value.length || movie.id === movieID).length && e.target.value.match(/[a-zA-Z]/)) {
+    if(e.target.value.length > 3 && e.target.value.length < 30 && !movieData.filter(movie => movie.name === e.target.value.length || movie.id === movieID).length && e.target.value.match(/[a-zA-Z]/)) {
       setValid(true)
     } else {
       setValid(false)

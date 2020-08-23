@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Nav({author}) {
   return (
     <>
-      <nav className="nav flex flex-wrap items-center justify-between px-4">
+      <nav className="nav bg-white flex flex-wrap items-center justify-between px-4">
         <div className="flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest">
           <span className="font-semibold text-xl tracking-tight">Movie Ratings</span>
         </div>
