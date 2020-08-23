@@ -28,7 +28,7 @@ export default function Movie({data, author}) {
     else return false
   }
 
-  return author === 'Michael' ? (
+  return author === 'michael' ? (
     <>
       <Nav author={author}/>
       <ButtonModal showModal={modal} author={author} movieData={data.data} setShowModal={setModal}/>
@@ -104,7 +104,7 @@ export default function Movie({data, author}) {
                 </thead>
                 <tbody>
                   {
-                    data.data.map(movie => {
+                    data.data.reverse().map(movie => {
                       return (
                         <tr>
                           <td  className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -156,7 +156,7 @@ export default function Movie({data, author}) {
                                     <>
                                      <span
                                        className="inline-block hover:bg-gray-400 bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-600 mr-2"
-                                     >{rating.author}</span>
+                                     >{rating.author[0].toUpperCase() + rating.author.slice(1)}</span>
                                     </>
                                   )
                                 })}

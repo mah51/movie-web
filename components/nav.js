@@ -30,7 +30,7 @@ export default function Nav({author}) {
               </Link>
             </li>
             {
-              author === 'Michael' ?
+              author === 'michael' ?
                 ( <li className="border-t md:border-none">
                   <Link href="/movie">
                     <a
@@ -40,7 +40,7 @@ export default function Nav({author}) {
             }
             <li className="border-t md:border-none">
               <span
-                  className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker">Logged in as {author}</span>
+                  className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker">Logged in as {author[0].toUpperCase() + author.slice(1)}</span>
             </li>
           </ul>
       </nav>

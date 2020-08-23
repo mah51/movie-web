@@ -6,30 +6,63 @@ import '../styles/app.css'
 
 import LogIn from "../components/login";
 
-const auth = [
-  { code: process.env.SALHA, author: 'Salha' },
-  { code: process.env.ASAL, author: 'Asal' },
-  { code: process.env.JOE, author: 'Joe' },
-  { code: process.env.MICHAEL, author: 'Michael' }
-]
+async function auth(password) {
+  const dataObj = {
+    password,
+  }
+  const response = await fetch('https://movie-apixd.herokuapp.com/auth', {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(dataObj)
+  })
+
+  if (response.status === 200) {
+    const res = await response.json();
+    if (res && res.error && res.error === 'not found') {
+      return false
+    } else {
+      return {name: res.name, password: res.password}
+    }
+  } else {
+    alert('There was an error' + response.error)
+  }
+}
+
 export default function MyApp({Component, pageProps, data}){
   const [author, setAuthor] = useState(null)
-  useEffect(() => {
-    if (auth.map(user => user.code).includes(window.localStorage.getItem('loggedIn'))) {setAuthor(auth[auth.map(user => user.code).indexOf(window.localStorage.getItem('loggedIn'))].author) }
-    else {
+  useEffect(async() => {
+    const current = window.localStorage.getItem('authMovie')
+    if (current) {
+     const dat = await auth(current)
+     if (dat) {
+       setAuthor(dat.name)
+     } else {
+       setAuthor(false)
+     }
+    } else {
       setAuthor(false)
-      window.localStorage.removeItem('loggedIn')
     }
   }, [])
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    const index = auth.map(user => user.code).indexOf(event.target[0].value)
-    if (index === - 1 ) { return alert('Incorrect code')}
-    const authObj = auth[index]
-    window.localStorage.setItem('loggedIn', authObj.code)
-    setAuthor(authObj.author);
+    const target = await auth(event.target[0].value)
+    if (target) {
+      window.localStorage.setItem('authMovie', target.password)
+      setAuthor(target.name);
+    } else {
+      alert('Incorrect code')
+    }
+
   }
+
   return author === null ? (
     <h1>Loading</h1>
   ) : typeof author === "string" ? (
