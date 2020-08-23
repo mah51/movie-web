@@ -37,10 +37,11 @@ export default function Review({data, author}) {
 
   return (
     <>
+      <div style={{height: '100vh'}} className="bg-gray-200">
       <Nav author={author}/>
-      <div className="bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4 px-3 py-10 bg-gray-200 flex justify-center">
+      <div  className="border-t border-l border-r border-gray-400 p-4 px-3  flex justify-center">
         <div className="w-full max-w-xs">
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-16 content-center" onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Movie
@@ -50,7 +51,7 @@ export default function Review({data, author}) {
                   className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-state">
                   {
-                    data.data.map(movie => {
+                    data.data.sort((a, b) => a.date - b.date).reverse().map(movie => {
                       return (
                         <option key={movie.id}>{movie.name}</option>
                       )
@@ -72,7 +73,7 @@ export default function Review({data, author}) {
                 onChange={handleChange}
                 className={`shadow appearance-none border border-${!isNaN(value) && value < 10 && value > 0 ? 'green' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="rating" type="text" placeholder="5.5"/>
-              {!isNaN(value) && value < 10 && value > 0 ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0-10.</p>)}
+              {!isNaN(value) && value < 10 && value > 0 ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 -10.</p>)}
             </div>
             <div className="flex items-center justify-between">
               <button
@@ -88,6 +89,7 @@ export default function Review({data, author}) {
             </div>
           </form>
         </div>
+      </div>
       </div>
     </>
   )
