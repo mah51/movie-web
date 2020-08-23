@@ -10,6 +10,7 @@ export default function Grid(props) {
   const [sortedField, setSortedField] = React.useState(null);
 
   let sortedMovies = movieData.sort((a, b) => a.rating - b.rating)
+
   if (sortedField !== null) {
     sortedMovies.sort((a, b) => {
       if (a[sortedField] < b[sortedField]) {
@@ -45,12 +46,16 @@ export default function Grid(props) {
                 onChange={handleChange}
                 className="float-right block appearance-none mr-3 border border-gray-700 text-gray-700 py-2 px-3 pr-6 rounded focus:outline-none bg-white focus:border-gray-500"
                 id="grid-state"
-                style={{backgroundImage: "url(M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z)"}}
               >
                 <option disabled>Sort By...</option>
                 <option>Rating</option>
                 <option>Date</option>
               </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center  p-6 text-gray-700">
+                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                  </svg>
+                </div>
               </div>
 
             </div>

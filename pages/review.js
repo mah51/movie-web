@@ -11,13 +11,12 @@ export default function Review({data, author}) {
 
   async function handleSubmit(e) {
     const dataObj = {
-      author: author,
+      author: author[0].toUpperCase() + author.slice(1),
       id: data.data[e.target[0].options.selectedIndex].id,
       rating: Math.round(parseFloat(e.target[1].value) * 10) / 10,
     }
     e.preventDefault()
-    console.log(e.target[1].value)
-    console.log(e.target[0].options.selectedIndex)
+
     const response = await fetch('https://movie-apixd.herokuapp.com/rating', {
       method: 'POST',
       mode: 'cors',
