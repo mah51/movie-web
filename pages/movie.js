@@ -1,14 +1,23 @@
 import {useState} from 'react';
 
 import Nav from "../components/nav";
-import Link from "next/link";
 import ButtonModal from "../components/movieModal.js"
 import moment from 'moment';
 
 export default function Movie({data, author}) {
   const [modal, setModal] = useState(false)
+  const [filter, setFilter] = useState('')
+  const filteredMovies = data.data.sort((a, b) => a.date - b.date).reverse().filter(movie => movie.name.toLowerCase().includes(filter) || movie.id.includes(filter))
+
+
   function handleSubmit() {
 
+  }
+
+
+
+  function handleSearch(e) {
+    setFilter(e.target.value.toLowerCase())
   }
 
   async function removeMovie(id) {
@@ -23,7 +32,6 @@ export default function Movie({data, author}) {
       },
       body: JSON.stringify(dataObj)
     })
-    console.log(response)
     if (response.status === 200) return true
     else return false
   }
@@ -33,6 +41,7 @@ export default function Movie({data, author}) {
       <Nav author={author}/>
       <ButtonModal showModal={modal} author={author} movieData={data.data} setShowModal={setModal}/>
       <div
+        style={{minHeight: '100vh'}}
       className="antialiased font-sans bg-gray-200"
       >
       <div className="container mx-auto px-4 sm:px-8">
@@ -41,8 +50,6 @@ export default function Movie({data, author}) {
             <h2 className="text-2xl font-semibold leading-tight">Movies</h2>
           </div>
           <div className="my-2 flex sm:flex-row flex-col">
-            <div className="flex flex-row mb-1 sm:mb-0">
-            </div>
             <div className="relative">
               <button
                 onClick={() => setModal(true)}
@@ -67,6 +74,7 @@ export default function Movie({data, author}) {
                         </svg>
                     </span>
               <input placeholder="Search"
+                     onChange={handleSearch}
                      className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"/>
             </div>
           </div>
@@ -104,7 +112,7 @@ export default function Movie({data, author}) {
                 </thead>
                 <tbody>
                   {
-                    data.data.reverse().map(movie => {
+                    filteredMovies.map(movie => {
                       return (
                         <tr>
                           <td  className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
