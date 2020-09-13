@@ -18,6 +18,7 @@ export default function Movie({data, author}) {
 
   function handleSearch(e) {
     setFilter(e.target.value.toLowerCase())
+    console.log(e.target.value.toLowerCase());
   }
 
   async function removeMovie(id) {
@@ -55,8 +56,8 @@ export default function Movie({data, author}) {
                 onClick={() => setModal(true)}
               className="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 border-r-0 text-gray-700  px-4  leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-plus" width="25"
-                     height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
-                     stroke-linecap="round" stroke-linejoin="round">
+                     height="25" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none"
+                     strokeLinecap="round" strokeLinejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z"/>
                   <circle cx="12" cy="12" r="9"/>
                   <line x1="9" y1="12" x2="15" y2="12"/>

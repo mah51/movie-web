@@ -36,7 +36,7 @@ export default function Modal({showModal, setShowModal, movieData}) {
                   }
                   <p className="my-4 text-gray-600 text-lg font-bold leading-relaxed">
                     {movieData[showModal[1]].ratings.length ?
-                    'Average - ' + Math.round(movieData[showModal[1]].ratings.map(rating => rating.rating).reduce((a,b) => a+b) / movieData[showModal[1]].ratings.length * 10 ) / 10 : ''
+                    'Average - ' + Math.round(movieData[showModal[1]].ratings.map(rating => rating.rating).reduce((a,b) => a+b) / movieData[showModal[1]].ratings.length * 10 ) / 10 : null
                     }
                   </p>
 
