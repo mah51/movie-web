@@ -26,10 +26,6 @@ export default function Grid(props) {
     setSortedField(e.target.value === 'Date' ? 'date' : 'average');
   }
 
-    React.useEffect(() => {
-
-    }, [])
-
   return (
     <>
       <Nav author={props.author}/>

@@ -38,17 +38,21 @@ async function auth(password) {
 export default function MyApp({Component, pageProps, data}){
   const [author, setAuthor] = useState(null)
   useEffect(async() => {
-    const current = window.localStorage.getItem('authMovie')
-    if (current) {
-     const dat = await auth(current)
-     if (dat) {
-       setAuthor(dat.name)
-     } else {
-       setAuthor(false)
-     }
-    } else {
-      setAuthor(false)
+    async function effect() {
+      const current = window.localStorage.getItem('authMovie')
+      if (current) {
+        const dat = await auth(current)
+        if (dat) {
+          setAuthor(dat.name)
+        } else {
+          setAuthor(false)
+        }
+      } else {
+        setAuthor(false)
+      }
     }
+    effect()
+
   }, [])
 
   async function handleSubmit(event) {

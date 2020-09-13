@@ -2,5 +2,3 @@
 ## Movie rating website
 
 A website for me and my mates to rate movies we have watched during quarantine. Not very secure btw.
-
-*Work in progress*
