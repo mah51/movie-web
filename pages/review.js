@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Nav from '../components/nav';
 
 export default function Review({data, author}) {
-  const [value, setValue] = useState(true)
+  const [value, setValue] = useState(null)
   const [textValue, setTextValue] = useState(false)
 
   function handleChange(e) {
@@ -29,6 +29,7 @@ export default function Review({data, author}) {
     }
 
     e.preventDefault()
+
     const response = await fetch('https://movie-apixd.herokuapp.com/rating', {
       method: 'POST',
       mode: 'cors',
@@ -43,7 +44,7 @@ export default function Review({data, author}) {
     })
 
     if (response.status === 200) {alert('Successfully added review')}
-    else { alert('There was an error' + response.error)}
+    else { alert('There was an error:\n' + response.body ? response.body.error : 'Undefined error')}
   }
 
   return (
@@ -82,9 +83,9 @@ export default function Review({data, author}) {
               </label>
               <input
                 onChange={handleChange}
-                className={`shadow appearance-none border border-${value ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`shadow appearance-none border border-${value || value === null ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="rating" type="text" placeholder="5.5"/>
-              {value ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 -10.</p>)}
+              {value || value === null ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 - 10.</p>)}
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Comment
               </label>
@@ -96,8 +97,10 @@ export default function Review({data, author}) {
             </div>
             <div className="flex items-center justify-between">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="Submit">
+                className={`bg-${!value && (!textValue || textValue.length < 500) ? 'gray' : 'blue'}-500 ${!value && (!textValue || textValue.length < 500) ? '' : 'hover:bg-blue-700'} text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                disabled={!value && (!textValue || textValue.length < 500)}
+                type="Submit"
+              >
                 Submit review
               </button>
               <Link href="/">

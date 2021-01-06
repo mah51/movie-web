@@ -24,11 +24,19 @@ export default function Nav({author}) {
             </li>
 
             <li className="border-t md:border-none">
+              <Link href="/reviews">
+                <a
+                  className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker">My reviews</a>
+              </Link>
+            </li>
+
+            <li className="border-t md:border-none">
               <Link href="/review">
               <a
                  className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker">Add review</a>
               </Link>
             </li>
+
             {
               author === 'michael' ?
                 ( <li className="border-t md:border-none">

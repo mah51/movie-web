@@ -188,7 +188,7 @@ export default function Movie({ data, author }) {
                               className="text-gray-900 whitespace-no-wrap"
                               style={{ textAlign: "center" }}
                             >
-                              {movie.author}
+                              {movie.author[0].toUpperCase() + movie.author.slice(1)}
                             </p>
                           </td>
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

@@ -53,7 +53,6 @@ export default function Grid(props) {
                   </svg>
                 </div>
               </div>
-
             </div>
             {sortedMovies.map((object, index) => {
               return (
@@ -82,18 +81,24 @@ export default function Grid(props) {
                       }
 
                     </div>
+
                     <div  key={index + 'div3'} className="p-4 flex-1 flex flex-col">
                       <h2 key={index + 'div4'} className="mb-4 text-2xl">{object.name}</h2>
+
+
                       { object.ratings.length ? (
                         <>
-                          <p key={index + 'div5'} className="mb-4 text-grey-darker text-sm flex-1">Average rating: <span>{object.average}</span></p>
-                          <button key={index + 'div6'} onClick={() => setShowModal([true, index])} className="btn card_btn">See Ratings</button>
+                          <p key={index + 'div5'} className="text-grey-darker">Average rating: <span>{object.average}</span></p>
+                          <p className="text-xs mb-4">By: {object.ratings.map(rating => rating.author[0].toUpperCase() + rating.author.slice(1)).join(', ')}</p>
+                          <button key={index + 'div6'} onClick={() => setShowModal([true, index])} className="btn card_btn">View Ratings</button>
                         </>
                       ) : (
                         <p key={index + 'div7'} className="mb-4 text-grey-darker text-sm flex-1">No rating data</p>
                       )
                       }
+
                     </div>
+
                   </div>
                 </div>
               )
