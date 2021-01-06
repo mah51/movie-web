@@ -27,10 +27,14 @@ export default function Modal({showModal, setShowModal, movieData}) {
                   {
                     movieData[showModal[1]].ratings.map((rating) => {
                       return (
-
-                        <p className="my-4 text-gray-600 text-lg leading-relaxed">
-                          {rating.author[0].toUpperCase() + rating.author.slice(1)} - {rating.rating}
-                      </p>
+                        <>
+                        <p className="text-gray-600 text-m font-bold  leading-relaxed">
+                          {rating.author[0].toUpperCase() + rating.author.slice(1)} → {rating.rating}
+                        </p>
+                        <p className="mb-4 text-gray-600 text-sm">
+                          {rating.comment ? rating.comment : 'No comment'}
+                        </p>
+                        </>
                       )
                   })
                   }

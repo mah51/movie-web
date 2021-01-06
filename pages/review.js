@@ -3,10 +3,21 @@ import Link from 'next/link'
 import Nav from '../components/nav';
 
 export default function Review({data, author}) {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(true)
+  const [textValue, setTextValue] = useState(false)
 
   function handleChange(e) {
-    setValue(e.target.value)
+    const data = parseInt(e.target.value)
+    if (!isNaN(data) && data < 10 && data > 0) {
+      setValue(true)
+    } else {
+      setValue(false)
+    }
+  }
+
+  function handleChangeText(e) {
+    const data = e.target.value
+    setTextValue(data)
   }
 
   async function handleSubmit(e) {
@@ -14,9 +25,10 @@ export default function Review({data, author}) {
       author: author[0].toUpperCase() + author.slice(1),
       id: data.data[e.target[0].options.selectedIndex].id,
       rating: Math.round(parseFloat(e.target[1].value) * 10) / 10,
+      comment: e.target[2].value,
     }
-    e.preventDefault()
 
+    e.preventDefault()
     const response = await fetch('https://movie-apixd.herokuapp.com/rating', {
       method: 'POST',
       mode: 'cors',
@@ -70,9 +82,17 @@ export default function Review({data, author}) {
               </label>
               <input
                 onChange={handleChange}
-                className={`shadow appearance-none border border-${!isNaN(value) && value < 10 && value > 0 ? 'green' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`shadow appearance-none border border-${ value ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="rating" type="text" placeholder="5.5"/>
-              {!isNaN(value) && value < 10 && value > 0 ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 -10.</p>)}
+              {value ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 -10.</p>)}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Comment
+              </label>
+              <textarea
+                onChange={handleChangeText}
+                className={`shadow appearance-none text-sm  border border-${textValue && textValue.length > 500 ? 'red' : 'gray'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                id="rating" type="text" placeholder="This movie was better than Tangled because..."/>
+              <p className={`text-${textValue && textValue.length > 500 ? 'red' : 'gray'}-500  text-right text-xs italic`}>{textValue ? textValue.length : 0 } / 500</p>
             </div>
             <div className="flex items-center justify-between">
               <button
