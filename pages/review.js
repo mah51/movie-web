@@ -83,7 +83,7 @@ export default function Review({data, author}) {
               </label>
               <input
                 onChange={handleChange}
-                className={`shadow appearance-none border border-${value || value === null ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`shadow appearance-none border border-${value || value === null ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none`}
                 id="rating" type="text" placeholder="5.5"/>
               {value || value === null ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 - 10.</p>)}
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -91,7 +91,7 @@ export default function Review({data, author}) {
               </label>
               <textarea
                 onChange={handleChangeText}
-                className={`shadow appearance-none text-sm  border border-${textValue && textValue.length > 500 ? 'red' : 'gray'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`shadow appearance-none text-sm  border border-${textValue && textValue.length > 500 ? 'red' : 'gray'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none`}
                 id="rating" type="text" placeholder="This movie was better than Tangled because..."/>
               <p className={`text-${textValue && textValue.length > 500 ? 'red' : 'gray'}-500  text-right text-xs italic`}>{textValue ? textValue.length : 0 } / 500</p>
             </div>
