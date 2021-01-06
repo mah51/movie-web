@@ -96,27 +96,10 @@ export default function MovieModal({showModal, setShowModal, movieData, author})
                       />
                     </div>
                   </div>
-                  <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                             >
-                        Current Movies
-                      </label>
-                      <textarea
-                        disabled
-                        style={{overflow: 'hidden'}}
-                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        value={
 
-                            movieData.map(movie => {
-                              return movie.name
-                            }).join('                   ')
 
-                        }
-                      />
                       { valid ? null : <p className="text-red-500 text-xs italic">This form is not valid!</p>}
-                    </div>
-                  </div>
+
 
 
               <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
