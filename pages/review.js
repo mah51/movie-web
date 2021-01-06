@@ -82,7 +82,7 @@ export default function Review({data, author}) {
               </label>
               <input
                 onChange={handleChange}
-                className={`shadow appearance-none border border-${ value ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`shadow appearance-none border border-${value ? 'gray' : 'red'}-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="rating" type="text" placeholder="5.5"/>
               {value ? '' : (<p className="text-red-500 text-xs italic">Enter a valid number between 0 -10.</p>)}
               <label className="block text-gray-700 text-sm font-bold mb-2">
